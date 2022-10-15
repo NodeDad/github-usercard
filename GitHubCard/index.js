@@ -11,6 +11,9 @@ let nodedad;
 axios.get('https://api.github.com/users/nodedad').then((res) => {
   console.log(res)
   nodedad = res;
+  let cards = document.querySelector('.cards');
+  let card = createCardMarkup(res.data);
+  cards.appendChild(card);
 }).catch()
 
 /*
