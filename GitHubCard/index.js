@@ -1,8 +1,17 @@
+import axios from 'axios';
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+
+let nodedad;
+
+axios.get('https://api.github.com/users/nodedad').then((res) => {
+  console.log(res)
+  nodedad = res;
+}).catch()
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -49,6 +58,57 @@ const followersArray = [];
       </div>
     </div>
 */
+
+function createCardMarkup(data) {
+
+  let card = document.createElement('div');
+  card.classList.add('card');
+
+  let cardImg = document.createElement('img');
+  cardImg.setAttribute('src', data.avatar_url);
+
+  let cardInfo = document.createElement('div');
+  cardInfo.classList.add('card-info');
+
+  card.appendChild(cardImg);
+  card.appendChild(cardInfo);
+
+  let cardInfoName = document.createElement('h3');
+  cardInfoName.classList.add('name');
+  cardInfoName.textContent = data.name;
+  card.cardInfo.appendChild(cardInfoName);
+
+  let cardInfoUsername = document.createElement('p');
+  cardInfoUsername.classList.add('username');
+  cardInfoUsername.textContent = data.login;
+  card.cardInfo.appendChild(cardInfoUsername);
+
+  let cardInfoLocation = document.createElement('p');
+  cardInfoLocation.textContent = data.location;
+  card.cardInfo.appendChild(cardInfoLocation);
+
+  let cardInfoProfile = document.createElement('p');
+  let cardInfoProfileA = document.createElement('a');
+  cardInfoProfileA.setAttribute('href', data.url);
+  cardInfoProfileA.textContent = data.url;
+  cardInfoProfile.appendChild(cardInfoProfileA);
+  card.cardInfo.appendChild(cardInfoProfile);
+
+  let cardInfoFollowers = document.createElement('p');
+  cardInfoFollowers.textContent = data.followers;
+  card.cardInfo.appendChild(cardInfoFollowers);
+
+  let cardInfoFollowing = document.createElement('p');
+  cardInfoFollowing.textContent = data.following;
+  card.cardInfo.appendChild(cardInfoFollowing);
+
+  let cardInfoBio = document.createElement('p');
+  cardInfoBio.textContent = data.bio;
+  card.cardInfo.appendChild(cardInfoBio);
+
+
+  return card;
+}
 
 /*
   List of LS Instructors Github username's:
